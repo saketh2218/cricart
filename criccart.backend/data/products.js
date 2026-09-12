@@ -5,7 +5,7 @@ const products = [
     "price": 349.99,
     "category": "Bats",
     "rating": 4.9,
-    "image": "https://images.unsplash.com/photo-1593766788306-2856109669de?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&w=800&q=80",
     "description": "Handcrafted Grade 1 English Willow cricket bat with premium grain structure and massive sweet spot."
   },
   {
@@ -14,7 +14,7 @@ const products = [
     "price": 69.99,
     "category": "Bats",
     "rating": 4.4,
-    "image": "https://images.unsplash.com/photo-1531415080290-bc98513989f4?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
     "description": "Durable Kashmir Willow bat designed for power hitting with heavy tennis and leather balls."
   },
   {
@@ -23,7 +23,7 @@ const products = [
     "price": 89.99,
     "category": "Bats",
     "rating": 4.5,
-    "image": "https://images.unsplash.com/photo-1593766788306-2856109669de?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&w=800&q=80",
     "description": "Narrow-bladed precision training bat engineered to improve eye-hand coordination."
   },
   {
@@ -32,7 +32,7 @@ const products = [
     "price": 24.99,
     "category": "Balls",
     "rating": 4.8,
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
     "description": "Alum tanned, four-piece hand-stitched leather ball approved for competitive matches."
   },
   {
@@ -41,7 +41,7 @@ const products = [
     "price": 26.5,
     "category": "Balls",
     "rating": 4.6,
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
     "description": "High-grade white leather ball with enhanced seam grip for limited-overs white-ball cricket."
   },
   {
@@ -50,7 +50,7 @@ const products = [
     "price": 28.99,
     "category": "Balls",
     "rating": 4.7,
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
     "description": "Fluorescent pink leather ball designed for high visibility under floodlights."
   },
   {
@@ -59,7 +59,7 @@ const products = [
     "price": 14.99,
     "category": "Balls",
     "rating": 4.3,
-    "image": "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
     "description": "Extra heavy felt-covered rubber tennis balls for fast-paced street and gully cricket."
   },
   {
@@ -68,7 +68,7 @@ const products = [
     "price": 49.99,
     "category": "Protective Gear",
     "rating": 4.7,
-    "image": "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?auto=format&fit=crop&w=800&q=80",
     "description": "Multi-flex split finger design with high-density foam and sheepskin leather palm."
   },
   {
@@ -77,7 +77,7 @@ const products = [
     "price": 94.99,
     "category": "Protective Gear",
     "rating": 4.8,
-    "image": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=800&q=80",
     "description": "Ultra-lightweight cane and foam construction for maximum mobility and impact protection."
   },
   {
@@ -86,7 +86,7 @@ const products = [
     "price": 139.99,
     "category": "Protective Gear",
     "rating": 4.9,
-    "image": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=800&q=80",
     "description": "Industry-leading safety helmet with titanium grille and advanced air-flow ventilation."
   },
   {
@@ -95,7 +95,7 @@ const products = [
     "price": 39.99,
     "category": "Protective Gear",
     "rating": 4.5,
-    "image": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?auto=format&fit=crop&w=800&q=80",
     "description": "Integrated dual inner and outer thigh protection with dual-strap ergonomic fit."
   },
   {
@@ -104,7 +104,7 @@ const products = [
     "price": 59.99,
     "category": "Protective Gear",
     "rating": 4.6,
-    "image": "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?auto=format&fit=crop&w=800&q=80",
     "description": "Full leather catching glove with octopus rubber suction grip and reinforced finger caps."
   },
   {
@@ -113,7 +113,7 @@ const products = [
     "price": 109.99,
     "category": "Apparel & Footwear",
     "rating": 4.8,
-    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
     "description": "High-grip rubber and metal studded turf spikes with gel cushioning for fast bowling and running."
   },
   {
@@ -122,17 +122,17 @@ const products = [
     "price": 29.99,
     "category": "Apparel & Footwear",
     "rating": 4.4,
-    "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=800&q=80",
     "description": "Breathable, moisture-wicking dry-fit white cricket jersey tailored for all-day play."
   },
   {
     "id": 15,
-    "name": "Dynamic Stretch Cricket Trousers",
+    "name": "Dynamic Athletic Cricket Trousers",
     "price": 34.99,
     "category": "Apparel & Footwear",
     "rating": 4.3,
-    "image": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=800&auto=format&fit=crop",
-    "description": "Four-way stretch white cricket track pants with reinforced knee panels for sliding."
+    "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
+    "description": "Four-way stretch white cricket athletic pants with reinforced knee panels for sliding."
   },
   {
     "id": 16,
@@ -140,8 +140,8 @@ const products = [
     "price": 89.99,
     "category": "Accessories & Bags",
     "rating": 4.7,
-    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&auto=format&fit=crop",
-    "description": "Heavy-duty nylon travel kit bag with tractor wheels, external bat pockets, and helmet vault."
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    "description": "Heavy-duty travel kit bag with tractor wheels, external bat pockets, and helmet vault."
   },
   {
     "id": 17,
@@ -149,7 +149,7 @@ const products = [
     "price": 44.99,
     "category": "Accessories & Bags",
     "rating": 4.6,
-    "image": "https://images.unsplash.com/photo-1531415080290-bc98513989f4?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
     "description": "Solid hardwood wickets mounted on a heavy cast-iron spring return base."
   },
   {
@@ -158,7 +158,7 @@ const products = [
     "price": 19.99,
     "category": "Accessories & Bags",
     "rating": 4.5,
-    "image": "https://images.unsplash.com/photo-1593766788306-2856109669de?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&w=800&q=80",
     "description": "Complete willow preparation kit including linseed bat oil, knocking-in wooden mallet, and grip applicator."
   },
   {
@@ -167,7 +167,7 @@ const products = [
     "price": 12.99,
     "category": "Accessories & Bags",
     "rating": 4.2,
-    "image": "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?auto=format&fit=crop&w=800&q=80",
     "description": "Cushioned chevron texture rubber replacement grips for maximum control and shock absorption."
   },
   {
@@ -176,7 +176,7 @@ const products = [
     "price": 15.99,
     "category": "Accessories & Bags",
     "rating": 4.4,
-    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&auto=format&fit=crop",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
     "description": "Water-resistant thermo-insulated full-length bat carrying case with adjustable shoulder strap."
   }
 ];
