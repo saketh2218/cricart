@@ -1,4 +1,10 @@
-# CricCart - Premium Cricket E-Commerce Platform
+# 🏏 CricCart - Premium Cricket E-Commerce Platform
+
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-5-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
 
 CricCart is a modern, high-performance, full-stack e-commerce web application dedicated to cricket enthusiasts. Built using **React (Vite)** on the frontend and **Node.js (Express) with MySQL** on the backend, the platform enables seamless browsing, searching, cart management, and user authentication backed by a relational database schema.
 
