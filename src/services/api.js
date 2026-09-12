@@ -1,13 +1,16 @@
+import mockProducts from '../data/mockProducts';
+
 const API_BASE_URL = 'http://localhost:5000/api';
 
 export const fetchProducts = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/products`);
     if (!response.ok) throw new Error('Network response was not ok');
-    return await response.json();
+    const data = await response.json();
+    return data && data.length > 0 ? data : mockProducts;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
+    console.warn("Backend server not reachable, displaying local cricket products:", error);
+    return mockProducts;
   }
 };
 
@@ -17,8 +20,9 @@ export const fetchProductById = async (id) => {
     if (!response.ok) throw new Error('Product not found');
     return await response.json();
   } catch (error) {
-    console.error(`Error fetching product with ID ${id}:`, error);
-    return null;
+    console.warn(`Backend server not reachable, loading product ${id} from local data:`, error);
+    const product = mockProducts.find(p => String(p.id) === String(id));
+    return product || null;
   }
 };
 

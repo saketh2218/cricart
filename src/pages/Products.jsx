@@ -32,15 +32,18 @@ const Products = () => {
     }
 
     if (searchQuery) {
+      const q = searchQuery.toLowerCase().trim();
       result = result.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+        (p.name && p.name.toLowerCase().includes(q)) ||
+        (p.category && p.category.toLowerCase().includes(q)) ||
+        (p.description && p.description.toLowerCase().includes(q))
       );
     }
 
     setFilteredProducts(result);
   }, [selectedCategory, searchQuery, allProducts]);
 
-  const categories = ['All', 'Bats', 'Balls', 'Protective Gear'];
+  const categories = ['All', ...new Set(allProducts.map((p) => p.category).filter(Boolean))];
 
   return (
     <>
