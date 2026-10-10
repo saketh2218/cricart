@@ -5,11 +5,28 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Loader from '../components/Loader';
 import fallbackImage from '../assests/image.png';
+import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
+import { useCompare } from '../context/CompareContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [services, setServices] = useState({
+    knocking: false,
+    scuffSheet: false,
+    toeGuard: false,
+    oiling: false,
+  });
+  const [selectedWeight, setSelectedWeight] = useState('Medium (1175g - 1195g)');
+  const [selectedHandle, setSelectedHandle] = useState('Short Handle (SH)');
+  const [activeTab, setActiveTab] = useState('specs');
+  const [addedMessage, setAddedMessage] = useState('');
+
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCompare, isInCompare, removeFromCompare } = useCompare();
 
   useEffect(() => {
     const getProductDetails = async () => {
@@ -44,32 +61,223 @@ const ProductDetails = () => {
     );
   }
 
+  const isFav = isInWishlist(product.id);
+  const isCompared = isInCompare(product.id);
+
+  const isBat = product.category === 'Bats';
+
+  // Calculate dynamic custom add-on costs
+  const calculateExtraCost = () => {
+    let extra = 0;
+    if (services.knocking) extra += 24.99;
+    if (services.scuffSheet) extra += 9.99;
+    if (services.toeGuard) extra += 7.99;
+    if (services.oiling) extra += 4.99;
+    return extra;
+  };
+
+  const currentTotalPrice = Number(product.price) + calculateExtraCost();
+
+  const handleAddToCartWithServices = () => {
+    const appliedServices = isBat ? services : null;
+    addToCart(product, appliedServices);
+    setAddedMessage('Added to cart with your custom cricket specifications!');
+    setTimeout(() => setAddedMessage(''), 3000);
+  };
+
   return (
     <>
       <NavBar />
       <main className="product-details-container">
         <div className="details-image-section">
+          <div className="details-badge-container">
+            {product.brand && <span className="details-brand-pill">{product.brand}</span>}
+            <span className="details-stock-pill">In Stock & Inspected</span>
+          </div>
           <img 
             src={product.image} 
             alt={product.name} 
             onError={(e) => { e.target.src = fallbackImage; }}
           />
+
+          <div className="quick-actions-bar">
+            <button 
+              className={`compare-pill-btn ${isCompared ? 'active' : ''}`}
+              onClick={() => isCompared ? removeFromCompare(product.id) : addToCompare(product)}
+            >
+              {isCompared ? "✓ In Comparison Deck" : "+ Add to Comparison"}
+            </button>
+            <button 
+              className={`wishlist-pill-btn ${isFav ? 'active' : ''}`}
+              onClick={() => toggleWishlist(product)}
+            >
+              {isFav ? '❤️ Saved in Wishlist' : '🤍 Add to Wishlist'}
+            </button>
+          </div>
         </div>
 
         <div className="details-info-section">
           <span className="details-category">{product.category}</span>
           <h1 className="details-name">{product.name}</h1>
-          <div className="details-rating">⭐ {product.rating} (Customer Reviews)</div>
-          <div className="details-price">${Number(product.price).toFixed(2)}</div>
+          <div className="details-rating">⭐ {product.rating} | Verified Cricketer Match Ratings</div>
+          
+          <div className="price-tag-wrapper">
+            <div className="details-price">${currentTotalPrice.toFixed(2)}</div>
+            {calculateExtraCost() > 0 && (
+              <span className="service-breakdown">
+                (Base: ${Number(product.price).toFixed(2)} + ${calculateExtraCost().toFixed(2)} Workshop Prep)
+              </span>
+            )}
+          </div>
+
           <p className="details-description">{product.description}</p>
+
+          {/* Cricket-Specific Workshop Customization (Bat Preparation) */}
+          {isBat && (
+            <div className="cricket-workshop-box">
+              <div className="workshop-header">
+                <h3>🏏 Master Bat Preparation & Knocking Workshop</h3>
+                <span className="workshop-tag">Recommended for English Willow</span>
+              </div>
+              <p className="workshop-note">
+                Select custom pre-play preparation done by master craftsmen before dispatch so your bat is 100% match-ready.
+              </p>
+
+              <div className="custom-options-grid">
+                <label className="checkbox-card">
+                  <input
+                    type="checkbox"
+                    checked={services.knocking}
+                    onChange={(e) => setServices({ ...services, knocking: e.target.checked })}
+                  />
+                  <div className="checkbox-text">
+                    <strong>10,000+ Machine Knocking-In</strong>
+                    <span>Hardens willow fibres, rounds edges & expands sweet spot (+ $24.99)</span>
+                  </div>
+                </label>
+
+                <label className="checkbox-card">
+                  <input
+                    type="checkbox"
+                    checked={services.scuffSheet}
+                    onChange={(e) => setServices({ ...services, scuffSheet: e.target.checked })}
+                  />
+                  <div className="checkbox-text">
+                    <strong>Protective Anti-Scuff Face Sheet</strong>
+                    <span>Guards against moisture, damp conditions and surface fissures (+ $9.99)</span>
+                  </div>
+                </label>
+
+                <label className="checkbox-card">
+                  <input
+                    type="checkbox"
+                    checked={services.toeGuard}
+                    onChange={(e) => setServices({ ...services, toeGuard: e.target.checked })}
+                  />
+                  <div className="checkbox-text">
+                    <strong>Fitted Rubber Toe-Guard</strong>
+                    <span>Prevents toe feathering, swelling from damp pitches & crease tapping (+ $7.99)</span>
+                  </div>
+                </label>
+
+                <label className="checkbox-card">
+                  <input
+                    type="checkbox"
+                    checked={services.oiling}
+                    onChange={(e) => setServices({ ...services, oiling: e.target.checked })}
+                  />
+                  <div className="checkbox-text">
+                    <strong>Linseed Oil Conditioning</strong>
+                    <span>Maintains natural moisture and prevents brittle willow cracking (+ $4.99)</span>
+                  </div>
+                </label>
+              </div>
+
+              <div className="sizing-selectors-row">
+                <div className="select-group">
+                  <label>Hand-Picked Weight Range:</label>
+                  <select value={selectedWeight} onChange={(e) => setSelectedWeight(e.target.value)}>
+                    <option value="Light (1140g - 1165g)">Light (1140g - 1165g / 2lb 8oz)</option>
+                    <option value="Medium (1175g - 1195g)">Medium (1175g - 1195g / 2lb 9.5oz)</option>
+                    <option value="Heavy (1200g - 1240g)">Heavy (1200g - 1240g / 2lb 11oz)</option>
+                  </select>
+                </div>
+
+                <div className="select-group">
+                  <label>Handle & Size Type:</label>
+                  <select value={selectedHandle} onChange={(e) => setSelectedHandle(e.target.value)}>
+                    <option value="Short Handle (SH)">Short Handle (Standard Adult 5'7" - 6'1")</option>
+                    <option value="Long Handle (LH)">Long Handle (Adult 6'2"+)</option>
+                    <option value="Harrow">Harrow (Youth 5'4" - 5'7")</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab Navigation for Specs / Comparison / Care */}
+          <div className="details-tabs-header">
+            <button
+              className={`tab-btn ${activeTab === 'specs' ? 'active' : ''}`}
+              onClick={() => setActiveTab('specs')}
+            >
+              Cricket Specifications
+            </button>
+            <button
+              className={`tab-btn ${activeTab === 'maintenance' ? 'active' : ''}`}
+              onClick={() => setActiveTab('maintenance')}
+            >
+              Maintenance & Match Advice
+            </button>
+          </div>
+
+          <div className="tab-body-container">
+            {activeTab === 'specs' && product.specs && (
+              <div className="specs-table-wrapper">
+                <table className="cricket-specs-table">
+                  <tbody>
+                    {Object.entries(product.specs).map(([key, val]) => (
+                      <tr key={key}>
+                        <td className="spec-label">
+                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+                        </td>
+                        <td className="spec-value">{val}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeTab === 'maintenance' && (
+              <div className="maintenance-guide-box">
+                <h4>🏏 Equipment Longevity Protocol:</h4>
+                <ul>
+                  <li><strong>Never use in wet or damp conditions</strong> without a protective anti-scuff sheet.</li>
+                  <li><strong>Store away from radiators or car trunks:</strong> Extreme dry heat evaporates natural sap from the willow fibers.</li>
+                  <li><strong>Begin net practice with older leather balls</strong> before facing 130km/h new-ball bowling to gradually temper the willow grains.</li>
+                </ul>
+              </div>
+            )}
+          </div>
 
           <hr className="details-divider" />
 
+          {addedMessage && (
+            <div className="added-success-alert">
+              ✓ {addedMessage}
+            </div>
+          )}
+
           <div className="details-actions">
-            <button className="details-add-btn">Add to Cart</button>
-            <button className="details-wishlist-btn">Add to Wishlist</button>
+            <button className="details-add-btn" onClick={handleAddToCartWithServices}>
+              Add to Cart With Selected Setup • ${currentTotalPrice.toFixed(2)}
+            </button>
+            <Link to="/compare" className="details-compare-btn">
+              View Comparison Table
+            </Link>
           </div>
-          <Link to="/" className="back-to-shop-link">← Back to Homepage</Link>
+          <Link to="/products" className="back-to-shop-link">← Back to Cricket Equipment Catalog</Link>
         </div>
       </main>
       <Footer />

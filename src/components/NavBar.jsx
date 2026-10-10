@@ -3,10 +3,12 @@ import logo from "../assests/image.png";
 import SearchBar from './SearchBar';
 import { useCart } from '../context/CartContext';
 import { useUser } from '../context/UserContext';
+import { useCompare } from '../context/CompareContext';
 
 const NavBar = () => {
   const { cartCount } = useCart();
   const { user, logoutUser } = useUser();
+  const { compareCount } = useCompare();
 
   return (
     <nav className='navbar'>
@@ -21,7 +23,12 @@ const NavBar = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/products">Products</Link>
+          <Link to="/products">Gear Catalog</Link>
+        </li>
+        <li>
+          <Link to="/compare" className="nav-compare-link">
+            Compare {compareCount > 0 && <span className="nav-badge">{compareCount}</span>}
+          </Link>
         </li>
         <li>
           <Link to="/wishlist">Wishlist</Link>
@@ -32,7 +39,6 @@ const NavBar = () => {
           </Link>
         </li>
 
-        {}
         {user ? (
           <>
             <li>
