@@ -9,6 +9,15 @@ const Compare = () => {
   const { compareItems, removeFromCompare, clearCompare } = useCompare();
   const { addToCart } = useCart();
 
+  const handleImgError = (e, item) => {
+    if (item.backupImage && e.target.src !== item.backupImage && !e.target.dataset.triedBackup) {
+      e.target.dataset.triedBackup = "true";
+      e.target.src = item.backupImage;
+    } else {
+      e.target.src = fallbackImage;
+    }
+  };
+
   if (compareItems.length === 0) {
     return (
       <>
@@ -77,7 +86,7 @@ const Compare = () => {
                       <img
                         src={item.image}
                         alt={item.name}
-                        onError={(e) => { e.target.src = fallbackImage; }}
+                        onError={(e) => handleImgError(e, item)}
                       />
                     </div>
                     <h4>{item.name}</h4>

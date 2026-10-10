@@ -22,6 +22,15 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const handleImgError = (e) => {
+    if (product.backupImage && e.target.src !== product.backupImage && !e.target.dataset.triedBackup) {
+      e.target.dataset.triedBackup = "true";
+      e.target.src = product.backupImage;
+    } else {
+      e.target.src = fallbackImage;
+    }
+  };
+
   return (
     <div className="product-card">
       <div className="card-top-actions">
@@ -30,7 +39,7 @@ const ProductCard = ({ product }) => {
           onClick={handleCompareClick}
           title={isCompared ? "Remove from comparison" : "Compare this cricket gear"}
         >
-          {isCompared ? "✓ In Compare" : "+ Compare"}
+          {isCompared ? "✓ In Deck" : "+ Compare"}
         </button>
 
         <button
@@ -48,7 +57,8 @@ const ProductCard = ({ product }) => {
             src={product.image} 
             alt={product.name} 
             className="product-img" 
-            onError={(e) => { e.target.src = fallbackImage; }}
+            loading="lazy"
+            onError={handleImgError}
           />
         </div>
       </Link>
@@ -82,7 +92,7 @@ const ProductCard = ({ product }) => {
             Add to Cart
           </button>
           <Link to={`/product/${product.id}`} className="custom-config-btn">
-            Configure Gear →
+            Workshop & Specs →
           </Link>
         </div>
       </div>

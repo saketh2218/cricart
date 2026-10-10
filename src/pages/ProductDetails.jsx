@@ -63,10 +63,17 @@ const ProductDetails = () => {
 
   const isFav = isInWishlist(product.id);
   const isCompared = isInCompare(product.id);
-
   const isBat = product.category === 'Bats';
 
-  // Calculate dynamic custom add-on costs
+  const handleImgError = (e) => {
+    if (product.backupImage && e.target.src !== product.backupImage && !e.target.dataset.triedBackup) {
+      e.target.dataset.triedBackup = "true";
+      e.target.src = product.backupImage;
+    } else {
+      e.target.src = fallbackImage;
+    }
+  };
+
   const calculateExtraCost = () => {
     let extra = 0;
     if (services.knocking) extra += 24.99;
@@ -92,13 +99,16 @@ const ProductDetails = () => {
         <div className="details-image-section">
           <div className="details-badge-container">
             {product.brand && <span className="details-brand-pill">{product.brand}</span>}
-            <span className="details-stock-pill">In Stock & Inspected</span>
+            <span className="details-stock-pill">In Stock & Verified</span>
           </div>
-          <img 
-            src={product.image} 
-            alt={product.name} 
-            onError={(e) => { e.target.src = fallbackImage; }}
-          />
+
+          <div className="details-main-img-box">
+            <img 
+              src={product.image} 
+              alt={product.name} 
+              onError={handleImgError}
+            />
+          </div>
 
           <div className="quick-actions-bar">
             <button 
@@ -111,7 +121,7 @@ const ProductDetails = () => {
               className={`wishlist-pill-btn ${isFav ? 'active' : ''}`}
               onClick={() => toggleWishlist(product)}
             >
-              {isFav ? '❤️ Saved in Wishlist' : '🤍 Add to Wishlist'}
+              {isFav ? '❤️ In Wishlist' : '🤍 Wishlist'}
             </button>
           </div>
         </div>
@@ -119,20 +129,20 @@ const ProductDetails = () => {
         <div className="details-info-section">
           <span className="details-category">{product.category}</span>
           <h1 className="details-name">{product.name}</h1>
-          <div className="details-rating">⭐ {product.rating} | Verified Cricketer Match Ratings</div>
+          <div className="details-rating">⭐ {product.rating} | Verified Match Performance Rating</div>
           
           <div className="price-tag-wrapper">
             <div className="details-price">${currentTotalPrice.toFixed(2)}</div>
             {calculateExtraCost() > 0 && (
               <span className="service-breakdown">
-                (Base: ${Number(product.price).toFixed(2)} + ${calculateExtraCost().toFixed(2)} Workshop Prep)
+                (Base: ${Number(product.price).toFixed(2)} + ${calculateExtraCost().toFixed(2)} Workshop Setup)
               </span>
             )}
           </div>
 
           <p className="details-description">{product.description}</p>
 
-          {/* Cricket-Specific Workshop Customization (Bat Preparation) */}
+          {/* Cricket Workshop Customization (Bat Preparation) */}
           {isBat && (
             <div className="cricket-workshop-box">
               <div className="workshop-header">
@@ -140,7 +150,7 @@ const ProductDetails = () => {
                 <span className="workshop-tag">Recommended for English Willow</span>
               </div>
               <p className="workshop-note">
-                Select custom pre-play preparation done by master craftsmen before dispatch so your bat is 100% match-ready.
+                Select custom pre-play preparation performed by master bat-makers before courier crating.
               </p>
 
               <div className="custom-options-grid">
@@ -164,7 +174,7 @@ const ProductDetails = () => {
                   />
                   <div className="checkbox-text">
                     <strong>Protective Anti-Scuff Face Sheet</strong>
-                    <span>Guards against moisture, damp conditions and surface fissures (+ $9.99)</span>
+                    <span>Guards against damp conditions and surface fissures (+ $9.99)</span>
                   </div>
                 </label>
 
@@ -176,7 +186,7 @@ const ProductDetails = () => {
                   />
                   <div className="checkbox-text">
                     <strong>Fitted Rubber Toe-Guard</strong>
-                    <span>Prevents toe feathering, swelling from damp pitches & crease tapping (+ $7.99)</span>
+                    <span>Prevents toe swelling and crease tapping cracks (+ $7.99)</span>
                   </div>
                 </label>
 
@@ -187,15 +197,15 @@ const ProductDetails = () => {
                     onChange={(e) => setServices({ ...services, oiling: e.target.checked })}
                   />
                   <div className="checkbox-text">
-                    <strong>Linseed Oil Conditioning</strong>
-                    <span>Maintains natural moisture and prevents brittle willow cracking (+ $4.99)</span>
+                    <strong>Raw Linseed Oil Treatment</strong>
+                    <span>Retains internal wood moisture & enhances durability (+ $4.99)</span>
                   </div>
                 </label>
               </div>
 
               <div className="sizing-selectors-row">
                 <div className="select-group">
-                  <label>Hand-Picked Weight Range:</label>
+                  <label>Hand-Selected Weight Range:</label>
                   <select value={selectedWeight} onChange={(e) => setSelectedWeight(e.target.value)}>
                     <option value="Light (1140g - 1165g)">Light (1140g - 1165g / 2lb 8oz)</option>
                     <option value="Medium (1175g - 1195g)">Medium (1175g - 1195g / 2lb 9.5oz)</option>
@@ -204,7 +214,7 @@ const ProductDetails = () => {
                 </div>
 
                 <div className="select-group">
-                  <label>Handle & Size Type:</label>
+                  <label>Handle & Blade Sizing:</label>
                   <select value={selectedHandle} onChange={(e) => setSelectedHandle(e.target.value)}>
                     <option value="Short Handle (SH)">Short Handle (Standard Adult 5'7" - 6'1")</option>
                     <option value="Long Handle (LH)">Long Handle (Adult 6'2"+)</option>
@@ -221,7 +231,7 @@ const ProductDetails = () => {
               className={`tab-btn ${activeTab === 'specs' ? 'active' : ''}`}
               onClick={() => setActiveTab('specs')}
             >
-              Cricket Specifications
+              Cricket Technical Specs
             </button>
             <button
               className={`tab-btn ${activeTab === 'maintenance' ? 'active' : ''}`}
@@ -251,11 +261,11 @@ const ProductDetails = () => {
 
             {activeTab === 'maintenance' && (
               <div className="maintenance-guide-box">
-                <h4>🏏 Equipment Longevity Protocol:</h4>
+                <h4>🏏 Equipment Care Protocols:</h4>
                 <ul>
-                  <li><strong>Never use in wet or damp conditions</strong> without a protective anti-scuff sheet.</li>
-                  <li><strong>Store away from radiators or car trunks:</strong> Extreme dry heat evaporates natural sap from the willow fibers.</li>
-                  <li><strong>Begin net practice with older leather balls</strong> before facing 130km/h new-ball bowling to gradually temper the willow grains.</li>
+                  <li><strong>Avoid wet grass practice</strong> without a protective polymer scuff sheet installed.</li>
+                  <li><strong>Store away from dry radiators:</strong> Rapid moisture loss results in brittle edges and toe splits.</li>
+                  <li><strong>Gradual Net Preparation:</strong> Use worn leather balls during your first 2-3 sessions before facing high-pace match deliveries.</li>
                 </ul>
               </div>
             )}
@@ -271,13 +281,13 @@ const ProductDetails = () => {
 
           <div className="details-actions">
             <button className="details-add-btn" onClick={handleAddToCartWithServices}>
-              Add to Cart With Selected Setup • ${currentTotalPrice.toFixed(2)}
+              Add to Cart • ${currentTotalPrice.toFixed(2)}
             </button>
             <Link to="/compare" className="details-compare-btn">
               View Comparison Table
             </Link>
           </div>
-          <Link to="/products" className="back-to-shop-link">← Back to Cricket Equipment Catalog</Link>
+          <Link to="/products" className="back-to-shop-link">← Back to Equipment Catalog</Link>
         </div>
       </main>
       <Footer />
